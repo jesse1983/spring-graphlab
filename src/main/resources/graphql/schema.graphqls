@@ -1,0 +1,70 @@
+enum CustomerType {
+    PERSON
+    COMPANY
+}
+type Customer {
+    id: ID
+    firstName: String!
+    lastName: String!
+    email: String!
+    type: CustomerType!
+}
+
+type Product {
+    id: ID
+    title: String!
+    price: Float!
+    stock: Int!
+}
+
+type Item {
+    id: ID
+    amount: Float!
+    discount: Float
+    product: Product!
+}
+
+type Sale {
+    id: ID
+    identifier: String!
+    date: String!
+    discount: Float
+    comments: String
+    customer: Customer!
+    itens: [Item]
+}
+
+type Query {
+    customers: [Customer]
+    products: [Product]
+    sales: [Sale]
+}
+
+input ProductInput {
+    id: ID
+    title: String!
+    price: Float!
+    stock: Int!
+}
+
+input CustomerInput {
+    id: ID
+    firstName: String!
+    lastName: String!
+    email: String!
+    type: CustomerType!
+}
+
+type Mutation {
+    createProduct(product: ProductInput!): Product
+    updateProduct(product: ProductInput!): Product
+    destroyProduct(id: ID!): Boolean
+
+    createCustomer(customer: CustomerInput!): Customer
+    updateCustomer(customer: CustomerInput!): Customer
+}
+
+type Subscription {
+    productModified(id: ID!): Product
+    customerModified(id: ID!): Customer
+}
