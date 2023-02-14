@@ -90,4 +90,13 @@ public class Mutation implements GraphQLMutationResolver {
         }
         throw new GraphQLException("Customer id " + customerInput.getId() + " does not exist.");
     }
+
+    public Boolean destroyCustomer(Long id) {
+        Optional<Customer> targetCustomer = customerRepository.findById(id);
+        if(targetCustomer.isPresent()) {
+            customerRepository.delete(targetCustomer.get());
+            return true;
+        }
+        throw new GraphQLException("Customer id " + id + " does not exist.");
+    }
 }

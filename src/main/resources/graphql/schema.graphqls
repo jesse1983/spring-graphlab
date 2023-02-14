@@ -62,6 +62,7 @@ type Mutation {
 
     createCustomer(customer: CustomerInput!): Customer
     updateCustomer(customer: CustomerInput!): Customer
+    destroyCustomer(id: ID!): Boolean
 }
 
 type Subscription {
